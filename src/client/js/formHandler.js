@@ -12,9 +12,6 @@ function handleSubmit(event) {
     if (formText !== "") {
       getApiKey('/getApiKey')
        .then(res => res.json())
-        .then(function(res){
-          fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${res}&of=json&txt=${formText}&model=Restaurants&lang=en`)
-          .then(res => res.json())
           .then(function(res) {
               document.getElementById('model').innerHTML = res.model;
               document.getElementById('agreement').innerHTML = res.agreement;
@@ -22,7 +19,6 @@ function handleSubmit(event) {
               document.getElementById('confidence').innerHTML = res.confidence;
               document.getElementById('irony').innerHTML = res.irony;
 
-          })
         })
     } else {
         console.log(error);

@@ -34,7 +34,9 @@ app.get('/test', function (req, res) {
 })
 
 app.get('/getApiKey', (req, res) => {
-    res.send(process.env.API_KEY)
+    const response = fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${process.env.API_KEY}&of=json&txt=${formText}&model=Restaurants&lang=en`)
+          
+    res.send(response)
 });
 
 module.exports=app
