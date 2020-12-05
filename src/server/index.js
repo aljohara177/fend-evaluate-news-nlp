@@ -32,12 +32,24 @@ app.listen(8080, function () {
 app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
-
-app.get('/getApiKey', (req, res) => {
-    const response = fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${process.env.API_KEY}&of=json&txt=${formText}&model=Restaurants&lang=en`)
-          
-    res.send(response)
+const apiKey = process.env.API_KEY
+const apiUrl = 'https://api.meaningcloud.com/sentiment-2.1?key=';
+const apiTxt = '&of=json&txt=';
+const model = '&model=Restaurants&lang=en'
+app.get('/getTextAnalysis', (req, res) => {
+    res.send(getTextAnalysis(req.body));
+  
 });
+
+const getTextAnalysis = async (textInput) => {
+    const res = await fetch(apiUrl + apiKey + apiTxt + textInput + model);
+    try {
+      const result = await res.json();
+      return result;
+    } catch (error) {
+      console.log("error", error);
+    }
+};
 
 module.exports=app
  

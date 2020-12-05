@@ -10,7 +10,7 @@ function handleSubmit(event) {
     let formText = document.getElementById('name').value
 
     if (formText !== "") {
-      getApiKey('/getApiKey')
+      getTextAnalysis('/getTextAnalysis', formText)
        .then(res => res.json())
           .then(function(res) {
               document.getElementById('model').innerHTML = res.model;
@@ -27,8 +27,15 @@ function handleSubmit(event) {
 }
 
 
-export const getApiKey = async(apiUrl) => {
-  const res = await fetch(apiUrl);
+export const getTextAnalysis = async(apiUrl, formInput) => {
+  const res = await fetch(apiUrl, {
+    method: 'POST', 
+    credentials: 'same-origin', 
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: formInput,      
+  });
   try {
     const result = await res.json();
     return result;
