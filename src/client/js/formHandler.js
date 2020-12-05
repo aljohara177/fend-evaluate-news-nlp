@@ -4,12 +4,12 @@ import {checkForName} from './nameChecker'
 
 
 function handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
 
     // check what text was put into the form field
-    let formText = document.getElementById('name').value
+    let formText = document.querySelector('#name').value
 
-    if (formText !== "") {
+    if (formText !== undefined) {
       getTextAnalysis('/getTextAnalysis', formText)
        .then(res => res.json())
           .then(function(res) {

@@ -7,7 +7,7 @@ import './styles/header.css';
 
 const submit = document.querySelector('.submit');
 
-submit.addEventListener('click', e => {
+submit.addEventListener('click', (e) => {
    handleSubmit(e); 
 });
 
